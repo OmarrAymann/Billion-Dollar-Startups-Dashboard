@@ -8,7 +8,7 @@ A modern, interactive data visualization project exploring global unicorn startu
 
 - 📈 **Interactive Charts** with modern dark themes
 - 🌎 Explore unicorns by **industry**, **region**, **valuation**, and **investors**
-- 🧠 Clean, extensible layout using `plotly.graph_objects` and `dash` or `streamlit` (optional)
+- 🧠 Clean, extensible layout using `plotly.graph_objects` and `dash`
 - 🌐 Based on real-world data from Kaggle
 
 ---
