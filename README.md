@@ -1,6 +1,6 @@
 # 🦄 Unicorn Companies Dashboard
 
-A modern, interactive data visualization project exploring global unicorn startups using the [Unicorn Companies Dataset](https://www.kaggle.com/datasets/deepcontractor/unicorn-companies-dataset). Built with **Plotly**, **Pandas**, and a sleek dark theme inspired by modern UI design systems.
+A modern, interactive data visualization project exploring global unicorn startups using the [Unicorn Companies Dataset](https://www.kaggle.com/datasets/deepcontractor/unicorn-companies-dataset). Built with **Plotly**, **Dash**, and a sleek dark theme inspired by modern UI design systems.
 
 ---
 
@@ -12,7 +12,17 @@ A modern, interactive data visualization project exploring global unicorn startu
 - 🌐 Based on real-world data from Kaggle
 
 ---
+## 📌 Overview
 
+📈 Discover patterns among unicorn startups:  
+- What industries dominate?  
+- Which countries have the most unicorns?  
+- How quickly do startups become unicorns?  
+- Who are the top investors backing billion-dollar companies?
+
+This project was created to showcase clean data wrangling, modern visuals, and storytelling with data.
+
+---
 ## 📁 Dataset
 
 - **Source**: [Kaggle - Unicorn Companies Dataset](https://www.kaggle.com/datasets/deepcontractor/unicorn-companies-dataset)
