@@ -30,3 +30,18 @@ This project was created to showcase clean data wrangling, modern visuals, and s
   - `Company`, `Valuation ($B)`, `Date Joined`, `Industry`
   - `City`, `Country`, `Continent`
   - `Year Founded`, `Total Raised`, `Investors`
+## 👥 Team
+
+This project was developed by:
+
+- **Omar Ayman Elgema3y**
+- **Ali Ayman Soliman**
+- **Abdallah Mahmoud**
+
+---
+
+## 🙏 Special Thanks
+
+A heartfelt thank you to **Dr. Eman Raslan** for her guidance, support, and mentorship throughout the project.
+
+---
