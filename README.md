@@ -1,6 +1,6 @@
-# 🦄 Unicorn Companies Dashboard
+# 💰 Billion Dollar Startups Dashboard
 
-A modern, interactive data visualization project exploring global unicorn startups using the [Unicorn Companies Dataset](https://www.kaggle.com/datasets/deepcontractor/unicorn-companies-dataset). Built with **Plotly**, **Dash**, and a sleek dark theme inspired by modern UI design systems.
+A modern, interactive data visualization project exploring global unicorn startups using the [Billion Dollar Startups](https://www.kaggle.com/datasets/deepcontractor/unicorn-companies-dataset). Built with **Plotly**, **Dash**, and a sleek dark theme inspired by modern UI design systems.
 
 ---
 
@@ -25,7 +25,7 @@ This project was created to showcase clean data wrangling, modern visuals, and s
 ---
 ## 📁 Dataset
 
-- **Source**: [Kaggle - Unicorn Companies Dataset](https://www.kaggle.com/datasets/deepcontractor/unicorn-companies-dataset)
+- **Source**: [Kaggle -Startups Companies Dataset](https://www.kaggle.com/datasets/deepcontractor/unicorn-companies-dataset)
 - **Fields**:
   - `Company`, `Valuation ($B)`, `Date Joined`, `Industry`
   - `City`, `Country`, `Continent`
