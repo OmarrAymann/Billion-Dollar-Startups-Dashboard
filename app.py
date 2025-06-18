@@ -19,8 +19,8 @@ except ImportError as e:
     print(f"Warning: Could not import custom modules: {e}")
     # Create dummy objects to prevent errors
     class DummyWrangle:
-        toatl_funding = "1,234"  # Fixed typo: should be "total_funding"
-        toatl_number_unicorn = "567"  # Fixed typo: should be "total_number_unicorn"
+        toatl_funding = "1,234"  
+        toatl_number_unicorn = "567"  
         total_valuation = "890"
         fig2 = go.Figure()
         fig3 = go.Figure()
