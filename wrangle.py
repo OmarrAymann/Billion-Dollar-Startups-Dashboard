@@ -4,8 +4,6 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pycountry
 import math
-
-# Import fig_layout with error handling
 try:
     import fig_layout
     layout_config = fig_layout.my_figlayout
@@ -16,13 +14,10 @@ except ImportError:
         'paper_bgcolor': 'rgba(0,0,0,0)',
         'font': {'color': 'white', 'family': 'Roboto'}
     }
-
-# Read data with error handling
 try:
     df = pd.read_csv("Unicorn_Companies.csv")
 except FileNotFoundError:
     print("Warning: Unicorn_Companies.csv not found. Creating dummy data.")
-    # Create dummy data for testing
     df = pd.DataFrame({
         'Company': ['Company A', 'Company B', 'Company C'] * 300,
         'Valuation ($B)': ['$1.5', '$2.3', '$3.1'] * 300,
@@ -37,20 +32,13 @@ except FileNotFoundError:
         'Investors Count': [5, 8, 12] * 300
     })
 
-# Data cleaning and processing
 def clean_and_process_data():
     global df
-    
-    # Clean the data - fix column shifting issue
     if 'Select Inverstors' in df.columns:
-        # Find rows where Select Investors is null (indicating shifted data)
+
         ind_shifted = df[df["Select Inverstors"].isnull()].index.to_list()
-        
-        # Remove index 789 if it exists and is correct
         if 789 in ind_shifted:
             ind_shifted.remove(789)
-        
-        # Fix shifted columns
         for i in ind_shifted:
             if i < len(df):
                 city = df.at[i, "City"]
@@ -60,36 +48,24 @@ def clean_and_process_data():
                 df.at[i, "City"] = invest
                 df.at[i, "Industry"] = city
                 df.at[i, "Select Inverstors"] = industry
-
-    # Process Valuation column
     if 'Valuation ($B)' in df.columns:
         df["Valuation ($B)"] = df["Valuation ($B)"].apply(
             lambda x: float(str(x).replace('$', '')) if pd.notna(x) else 0
         )
-    
-    # Process Date Joined
     if 'Date Joined' in df.columns:
         df["Date Joined"] = pd.to_datetime(df["Date Joined"], errors='coerce')
-    
-    # Replace "None" values with np.nan
     def replace_none_with_npnan(x):
         return np.nan if str(x) == "None" else x
     
     df = df.map(replace_none_with_npnan)
-    
-    # Fill missing Investors Count
     if 'Investors Count' in df.columns:
         df["Investors Count"] = df["Investors Count"].fillna(0)
-    
-    # Process Total Raised column
     def get_actual_total_raised(value):
         if pd.isna(value):
             return np.nan
         
         value_str = str(value)
         to_replace = "$BMK"
-        
-        # Extract numeric part
         numeric_part = ''.join(c for c in value_str if c.isdigit() or c == '.')
         if not numeric_part:
             return 0
@@ -99,7 +75,6 @@ def clean_and_process_data():
         except ValueError:
             return 0
         
-        # Get unit (last character)
         unity = value_str[-1].upper()
         
         if unity == "B":
@@ -115,16 +90,14 @@ def clean_and_process_data():
     
     if 'Total Raised' in df.columns:
         df["Total Raised"] = df["Total Raised"].apply(get_actual_total_raised)
-        df["Total Raised"] = df["Total Raised"] / 1e6  # Convert to millions
-    
-    # Rename columns
+        df["Total Raised"] = df["Total Raised"] / 1e6 
+
     column_renames = {
         "Total Raised": "Total Raised(M)",
         "Select Inverstors": "Select Investors"
     }
     df = df.rename(columns=column_renames)
-    
-    # Clean specific values
+
     if 'Financial Stage' in df.columns:
         df['Financial Stage'] = df['Financial Stage'].replace({"Acq": "Acquired"})
     
@@ -143,10 +116,9 @@ def clean_and_process_data():
     if 'Investors Count' in df.columns:
         df["Investors Count"] = df["Investors Count"].astype(int)
 
-# Clean and process the data
+
 clean_and_process_data()
 
-# Create visualizations
 def create_top_investors_chart():
     """Create top 10 investors bar chart"""
     investors = []
@@ -177,7 +149,6 @@ def create_top_investors_chart():
         fig.update_layout(layout_config)
         return fig
     else:
-        # Return empty figure if no data
         fig = go.Figure()
         fig.add_annotation(
             text="No investor data available",
@@ -239,18 +210,16 @@ def create_world_map():
         total_valuation_all = df["Valuation ($B)"].sum()
         top_10_countries_total_valuation_perc = (top_10_countries_total_valuation * 100 / total_valuation_all) if total_valuation_all > 0 else 0
         
-        # Get ISO codes with error handling
         def get_iso_code(country_name):
             try:
                 return pycountry.countries.lookup(country_name).alpha_3
             except:
-                # Common country name mappings
                 country_mapping = {
                     'United States': 'USA',
                     'United Kingdom': 'GBR',
                     'South Korea': 'KOR'
                 }
-                return country_mapping.get(country_name, 'USA')  # Default fallback
+                return country_mapping.get(country_name, 'USA')
         
         top_10_countries["iso_code"] = top_10_countries["Country"].apply(get_iso_code)
         
@@ -296,17 +265,14 @@ def create_industry_chart():
     else:
         return go.Figure()
 
-# Create all figures
 fig2 = create_top_investors_chart()
 fig3 = create_top_companies_scatter()
 fig4 = create_world_map()
 fig5 = create_industry_chart()
 
-# Calculate constants
 total_valuation = math.ceil(df['Valuation ($B)'].sum() * 10**-3) if len(df) > 0 else 0
 total_number_unicorn = df['Company'].count() if 'Company' in df.columns else 0
 total_funding = round(df["Total Raised(M)"].sum() * 10**-3, 2) if 'Total Raised(M)' in df.columns else 0
 
-# Fix variable names (remove typos)
-toatl_number_unicorn = total_number_unicorn  # Keep for backward compatibility
-toatl_funding = total_funding  # Keep for backward compatibility
+toatl_number_unicorn = total_number_unicorn
+toatl_funding = total_funding  
